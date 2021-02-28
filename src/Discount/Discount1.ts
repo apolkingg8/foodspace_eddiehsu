@@ -3,12 +3,12 @@ import Product from "../Product";
 import {union} from "lodash";
 
 /**
- * 同商品第二件五折
+ * 同商品第二件五折，不可與其他優惠併用
  */
 export default class Discount1 implements IDiscount {
 
     id = "discount1"
-    name = "同商品第二件五折"
+    name = "同商品第二件五折，不可與其他優惠併用"
 
     apply = async (products: Product[]): Promise<Product[]> => {
         let tempMap: Record<string, number> = {}
