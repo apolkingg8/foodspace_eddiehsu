@@ -10,7 +10,26 @@ export default class Discount1 implements IDiscount {
     name = "同商品第二件五折"
 
     apply = async (products: Product[]): Promise<Product[]> => {
-        let map = {}
-        return products
+        let countMap: Record<string, number> = {}
+        let res: Product[] = products.map((product, index)=> {
+            let newProduct = new Product(product)
+
+            typeof countMap[product.id] === "number"
+                ? countMap[product.id] += 1
+                : countMap[product.id] = 1
+
+            if(countMap[product.id] >= 2
+            && countMap[product.id] % 2 === 0) {
+                newProduct.pricing = Math.round(product.pricing / 2)
+            }
+
+            return newProduct
+        })
+
+        return res
+    }
+
+    constructor(props: Partial<Product>) {
+        Object.assign(this, props)
     }
 }
