@@ -3,7 +3,11 @@ import Product from "./Product";
 import Discount1 from "./Discount/Discount1";
 import Discount2 from "./Discount/Discount2";
 
-describe("checkoutService", async ()=> {
+describe("checkoutService", ()=> {
+
+    beforeEach(async ()=> {
+        checkoutService.discounts = []
+    })
 
     test("constructor()", ()=> {
         expect(checkoutService).toBeInstanceOf(CheckoutService)
@@ -60,43 +64,49 @@ describe("checkoutService", async ()=> {
 
         expect(checkoutService.discounts).toEqual([])
         expect(res).toEqual(products)
-        expect(res).not.toBe(products)
     })
 
     test("checkout() with discount1", async ()=> {
+        let discount1 = new Discount1({})
         let products = [
             new Product({id: "1", name: "1", pricing: 13}),
             new Product({id: "1", name: "1", pricing: 13}),
             new Product({id: "3", name: "3", pricing: 13}),
         ]
 
-        await checkoutService.addDiscount(new Discount1({}))
+        await checkoutService.addDiscount(discount1)
 
         let res = await checkoutService.checkout(products)
 
         expect(res).not.toEqual(products)
 
+        products[0].appliedDiscountIds = [discount1.id]
         products[1].discount = 7
+        products[1].appliedDiscountIds = [discount1.id]
 
         expect(res).toEqual(products)
     })
 
     test("checkout() with discount2", async ()=> {
+        let discount2 = new Discount2({})
         let products = [
             new Product({id: "1", name: "1", pricing: 9}),
             new Product({id: "2", name: "2", pricing: 9}),
             new Product({id: "3", name: "3", pricing: 9}),
         ]
 
-        await checkoutService.addDiscount(new Discount2({}))
+        await checkoutService.addDiscount(discount2)
 
         let res = await checkoutService.checkout(products)
 
         expect(res).not.toEqual(products)
 
         products[0].discount = 5
+        products[0].appliedDiscountIds = [discount2.id]
         products[1].discount = 5
+        products[1].appliedDiscountIds = [discount2.id]
         products[2].discount = 5
+        products[2].appliedDiscountIds = [discount2.id]
 
         expect(res).toEqual(products)
     })

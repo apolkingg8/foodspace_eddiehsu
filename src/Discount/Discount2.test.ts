@@ -1,7 +1,7 @@
 import Discount2 from "./Discount2";
 import Product from "../Product";
 
-describe("discount2", async ()=> {
+describe("discount2", ()=> {
 
     test("constructor()", async ()=> {
         let discount = new Discount2({})
