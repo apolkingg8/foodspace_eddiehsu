@@ -29,7 +29,7 @@ export default class Discount1 implements IDiscount {
         return res
     }
 
-    constructor(props: Partial<Product>) {
+    constructor(props: Partial<Discount1>) {
         Object.assign(this, props)
     }
 }
