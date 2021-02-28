@@ -102,6 +102,8 @@ describe("checkoutService", async ()=> {
     })
 
     test("checkout() with discount1 & discount2", async ()=> {
+        let discount1 = new Discount1({})
+        let discount2 = new Discount2({})
         let products = [
             new Product({id: "3", name: "3", pricing: 55}),
             new Product({id: "2", name: "2", pricing: 50}),
@@ -110,18 +112,23 @@ describe("checkoutService", async ()=> {
             new Product({id: "4", name: "4", pricing: 60}),
         ]
 
-        await checkoutService.addDiscount(new Discount1({}))
-        await checkoutService.addDiscount(new Discount2({}))
+        await checkoutService.addDiscount(discount1)
+        await checkoutService.addDiscount(discount2)
 
         let res = await checkoutService.checkout(products)
 
         expect(res).not.toEqual(products)
 
         products[0].discount = 0
-        products[1].discount = 10
+        products[0].appliedDiscountIds = [discount1.id]
+        products[1].discount = 5
+        products[1].appliedDiscountIds = [discount2.id]
         products[2].discount = 28
-        products[2].discount = 5
-        products[2].discount = 5
+        products[2].appliedDiscountIds = [discount1.id]
+        products[3].discount = 5
+        products[3].appliedDiscountIds = [discount2.id]
+        products[4].discount = 5
+        products[4].appliedDiscountIds = [discount2.id]
 
         expect(res).toEqual(products)
     })
