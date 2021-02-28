@@ -5,6 +5,7 @@ export default class Product {
 
     name: string = ""
     pricing: number = 0
+    discount: number = 0
 
     appliedDiscountIds: string[] = []
 

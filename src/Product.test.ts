@@ -11,11 +11,13 @@ describe("Product", ()=> {
             id: '1',
             name: '1',
             pricing: 1,
+            discount: 1,
         })
 
         expect(prod1.id).toEqual('1')
         expect(prod1.name).toEqual('1')
         expect(prod1.pricing).toEqual(1)
+        expect(prod1.discount).toEqual(1)
         expect(prod1.appliedDiscountIds).toEqual([])
     })
 })

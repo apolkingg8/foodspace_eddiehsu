@@ -20,7 +20,7 @@ export default class Discount1 implements IDiscount {
 
             if(countMap[product.id] >= 2
             && countMap[product.id] % 2 === 0) {
-                newProduct.pricing = Math.round(product.pricing / 2)
+                newProduct.discount = Math.round(product.pricing / 2)
             }
 
             return newProduct

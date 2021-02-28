@@ -69,7 +69,7 @@ describe("Discount1", ()=> {
 
         expect(res).not.toEqual(products)
 
-        products[1].pricing = 5
+        products[1].discount = 5
 
         expect(res).toEqual(products)
         expect(res).not.toBe(products)
@@ -104,8 +104,8 @@ describe("Discount1", ()=> {
 
         expect(res).not.toEqual(products)
 
-        products[1].pricing = 5
-        products[4].pricing = 5
+        products[1].discount = 5
+        products[4].discount = 5
 
         expect(res).toEqual(products)
         expect(res).not.toBe(products)
@@ -148,9 +148,9 @@ describe("Discount1", ()=> {
 
         expect(res).not.toEqual(products)
 
-        products[1].pricing = 5
-        products[4].pricing = 5
-        products[6].pricing = 5
+        products[1].discount = 5
+        products[4].discount = 5
+        products[6].discount = 5
 
         expect(res).toEqual(products)
         expect(res).not.toBe(products)
