@@ -67,8 +67,11 @@ describe("discount2", async ()=> {
         expect(res).not.toEqual(products)
 
         products[0].discount = 5
+        products[0].appliedDiscountIds = [discount.id]
         products[1].discount = 5
+        products[1].appliedDiscountIds = [discount.id]
         products[2].discount = 5
+        products[2].appliedDiscountIds = [discount.id]
 
         expect(res).toEqual(products)
     })
@@ -103,10 +106,15 @@ describe("discount2", async ()=> {
         expect(res).not.toEqual(products)
 
         products[0].discount = 5
+        products[0].appliedDiscountIds = [discount.id]
         products[1].discount = 5
+        products[1].appliedDiscountIds = [discount.id]
         products[2].discount = 5
+        products[2].appliedDiscountIds = [discount.id]
         products[3].discount = 5
+        products[3].appliedDiscountIds = [discount.id]
         products[4].discount = 5
+        products[4].appliedDiscountIds = [discount.id]
 
         expect(res).toEqual(products)
     })
@@ -161,9 +169,11 @@ describe("discount2", async ()=> {
         expect(res).not.toEqual(products)
 
         products[0].discount = 5
-        products[1].discount = 0
+        products[0].appliedDiscountIds = [discount.id]
         products[2].discount = 5
+        products[2].appliedDiscountIds = [discount.id]
         products[3].discount = 5
+        products[3].appliedDiscountIds = [discount.id]
 
         expect(res).toEqual(products)
     })

@@ -69,7 +69,9 @@ describe("Discount1", ()=> {
 
         expect(res).not.toEqual(products)
 
+        products[0].appliedDiscountIds = [discount.id]
         products[1].discount = 5
+        products[1].appliedDiscountIds = [discount.id]
 
         expect(res).toEqual(products)
         expect(res).not.toBe(products)
@@ -104,11 +106,15 @@ describe("Discount1", ()=> {
 
         expect(res).not.toEqual(products)
 
+        products[0].appliedDiscountIds = [discount.id]
         products[1].discount = 5
+        products[1].appliedDiscountIds = [discount.id]
+
+        products[3].appliedDiscountIds = [discount.id]
         products[4].discount = 5
+        products[4].appliedDiscountIds = [discount.id]
 
         expect(res).toEqual(products)
-        expect(res).not.toBe(products)
     })
 
     test("apply() applied complex", async ()=> {
@@ -148,12 +154,19 @@ describe("Discount1", ()=> {
 
         expect(res).not.toEqual(products)
 
+        products[0].appliedDiscountIds = [discount.id]
         products[1].discount = 5
+        products[1].appliedDiscountIds = [discount.id]
+
+        products[3].appliedDiscountIds = [discount.id]
         products[4].discount = 5
+        products[4].appliedDiscountIds = [discount.id]
+
+        products[2].appliedDiscountIds = [discount.id]
         products[6].discount = 5
+        products[6].appliedDiscountIds = [discount.id]
 
         expect(res).toEqual(products)
-        expect(res).not.toBe(products)
     })
 
     test("apply() with bad input", async ()=> {

@@ -1,5 +1,6 @@
 import {IDiscount} from "./IDiscount";
 import Product from "../Product";
+import {union} from "lodash";
 
 /**
  * 任意商品(可相同也可不同)滿3件以上每件皆折5元
@@ -26,6 +27,10 @@ export default class Discount2 implements IDiscount {
             }
 
             newProduct.discount += 5
+            newProduct.appliedDiscountIds = union(
+                newProduct.appliedDiscountIds,
+                [this.id],
+            )
 
             return newProduct
         })

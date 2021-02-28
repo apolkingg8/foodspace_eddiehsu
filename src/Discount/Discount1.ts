@@ -1,5 +1,6 @@
 import {IDiscount} from "./IDiscount";
 import Product from "../Product";
+import {union} from "lodash";
 
 /**
  * 同商品第二件五折
@@ -10,21 +11,33 @@ export default class Discount1 implements IDiscount {
     name = "同商品第二件五折"
 
     apply = async (products: Product[]): Promise<Product[]> => {
-        let countMap: Record<string, number> = {}
+        let tempMap: Record<string, number> = {}
+        let pairIndexArr: number[] = []
         let res: Product[] = products.map((product, index)=> {
             let newProduct = new Product(product)
 
-            typeof countMap[product.id] === "number"
-                ? countMap[product.id] += 1
-                : countMap[product.id] = 1
+            if(newProduct.appliedDiscountIds.length > 0) {
+                return newProduct
+            }
 
-            if(countMap[product.id] >= 2
-            && countMap[product.id] % 2 === 0) {
+            if(typeof tempMap[product.id] === "number") {
                 newProduct.discount = Math.round(product.pricing / 2)
+                pairIndexArr.push(tempMap[product.id])
+                pairIndexArr.push(index)
+                delete tempMap[product.id]
+            } else {
+                tempMap[product.id] = index
             }
 
             return newProduct
         })
+
+        for(let index of pairIndexArr) {
+            res[index].appliedDiscountIds = union(
+                res[index].appliedDiscountIds,
+                [this.id],
+            )
+        }
 
         return res
     }
